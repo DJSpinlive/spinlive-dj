@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 240 10% 4%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 4%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 4%;
+  --primary: 258 90% 66%;
+  --primary-foreground: 0 0% 100%;
+  --primary-lighter: 258 90% 80%;
+  --primary-light: 258 90% 73%;
+  --primary-dark: 258 70% 55%;
+  --primary-darker: 258 60% 45%;
+  --secondary: 240 5% 96%;
+  --secondary-foreground: 240 6% 10%;
+  --muted: 240 5% 96%;
+  --muted-foreground: 240 4% 46%;
+  --accent: 240 5% 96%;
+  --accent-foreground: 240 6% 10%;
+  --destructive: 350 89% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 240 6% 90%;
+  --input: 240 6% 90%;
+  --ring: 258 90% 66%;
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: 218 44% 5%; /* #070B12 */
+  --foreground: 0 0% 100%;
+  --card: 216 29% 7%; /* #0D1117 */
+  --card-foreground: 0 0% 100%;
+  --popover: 219 20% 15%; /* #1E2536 */
+  --popover-foreground: 0 0% 100%;
+  --primary: 258 90% 66%; /* #8B5CF6 */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 222 33% 15%; /* #1A2234 */
+  --secondary-foreground: 0 0% 100%;
+  --muted: 222 33% 15%;
+  --muted-foreground: 224 19% 62%; /* #8B95B0 */
+  --accent: 219 20% 15%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84% 60%; /* #EF4444 */
+  --destructive-foreground: 0 0% 100%;
+  --border: 220 23% 23%; /* #2D3548 */
+  --input: 220 23% 23%;
+  --ring: 258 90% 66%;
+}
+
+/* ===== SpinLive Studio (DJ dashboard) ===== */
+.studio-root {
+  background:
+    radial-gradient(900px 480px at 78% -10%, rgba(139, 92, 246, 0.1), transparent 60%),
+    radial-gradient(700px 420px at -8% 110%, rgba(56, 189, 248, 0.06), transparent 60%),
+    #070b12;
+  color: #f2f2f8;
+  font-feature-settings: "cv02", "cv03";
+}
+
+.studio-root ::selection {
+  background: rgba(139, 92, 246, 0.4);
+}
+
+.studio-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #1a2234 transparent;
+}
+.studio-scroll::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+.studio-scroll::-webkit-scrollbar-thumb {
+  background: #1a2234;
+  border-radius: 9px;
+}
+.studio-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* equalizer bars on the now-playing queue card */
+@keyframes studio-eq {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+.studio-eq i {
+  display: block;
+  width: 3px;
+  border-radius: 2px;
+  background: #a78bfa;
+  transform-origin: bottom;
+  animation: studio-eq 1s ease-in-out infinite;
+}
+.studio-eq i:nth-child(2) {
+  animation-delay: 0.18s;
+}
+.studio-eq i:nth-child(3) {
+  animation-delay: 0.36s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .studio-root *,
+  .studio-root *::before,
+  .studio-root *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

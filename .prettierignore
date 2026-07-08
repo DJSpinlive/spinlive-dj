@@ -1,0 +1,7 @@
+build
+.next
+.history
+node_modules
+.husky
+next-env.d.ts
+commitlint.config.js
