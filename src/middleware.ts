@@ -44,7 +44,7 @@ export function middleware(request: NextRequest) {
   const protectedRoutes = ["/dashboard", "/profile", "/orders", "/wallet"];
 
   // Define auth routes (redirect away if logged in)
-  const authRoutes = ["/sign-in", "/sign-up", "/forgot-password"];
+  const authRoutes = ["/login", "/signup", "/forgot-password"];
 
   // Check if current path is a protected route
   const isProtectedRoute = protectedRoutes.some((route) =>
@@ -66,16 +66,23 @@ export function middleware(request: NextRequest) {
     }
   }
 
+  // Home page: send to studio if signed in, login otherwise
+  if (pathname === "/") {
+    return NextResponse.redirect(
+      new URL(hasValidSession ? "/studio" : "/login", request.url)
+    );
+  }
+
   // Protected routes: require valid session
   if (isProtectedRoute && !hasValidSession) {
-    const signInUrl = new URL("/sign-in", request.url);
+    const signInUrl = new URL("/login", request.url);
     signInUrl.searchParams.set("redirect", pathname);
     return NextResponse.redirect(signInUrl);
   }
 
-  // Auth routes: redirect to /dashboard if already logged in
+  // Auth routes: redirect to /studio if already logged in
   if (isAuthRoute && hasValidSession) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+    return NextResponse.redirect(new URL("/studio", request.url));
   }
 
   return NextResponse.next();

@@ -108,7 +108,7 @@ export async function openChatSocket({
     role,
   } = (await res.json()) as ChatTicketResponse;
 
-  // Preference order: ticket-response ws_url → create-time ws_url →
+  // Preference order: create-time chat_ws_url → ticket-response ws_url →
   // gateway-derived. Advertised hosts can be stale or unreachable
   // (e.g. wss://chat.spinlive.pro with no DNS), so on a failed dial we
   // fall through to the next candidate — a failed dial never reaches the
@@ -116,7 +116,7 @@ export async function openChatSocket({
   const gatewayWs = `${origin.replace(/^http/, "ws")}/api/v1/chat/ws`;
   const candidates = [
     ...new Set(
-      [ticketWsUrl, wsUrl, gatewayWs].filter((u): u is string => isPublicUrl(u))
+      [wsUrl, ticketWsUrl, gatewayWs].filter((u): u is string => isPublicUrl(u))
     ),
   ];
 

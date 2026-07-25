@@ -1,10 +1,3 @@
-import React from "react";
-
-
-const page = () => (
-  <div>
-   hello world
-  </div>
-);
+const page = () => null;
 
 export default page;

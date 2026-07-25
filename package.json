@@ -2,6 +2,7 @@
   "name": "yoris-web",
   "version": "0.1.0",
   "private": true,
+  "main": "electron/main.js",
   "scripts": {
     "dev": "next dev --turbopack",
     "dev:no-turbo": "next dev",
@@ -15,7 +16,9 @@
     "prepare": "husky install",
     "format": "prettier --write .",
     "copy-env": "node scripts/copy-env.js",
-    "docker:build": "node scripts/docker-build.js"
+    "docker:build": "node scripts/docker-build.js",
+    "electron:dev": "concurrently -k -n NEXT,ELECTRON \"yarn dev:no-turbo\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron:build": "next build && node scripts/copy-standalone-assets.js && electron-builder"
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.16.8",
@@ -68,7 +71,10 @@
     "autoprefixer": "^10.4.21",
     "axios": "^1.12.2",
     "commitlint": "^19.6.1",
+    "concurrently": "^10.0.3",
     "critters": "^0.0.25",
+    "electron": "^43.1.0",
+    "electron-builder": "26.15.3",
     "eslint": "^9.17.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-next": "15.3.2",
@@ -86,10 +92,36 @@
     "prettier": "^3.4.2",
     "sass": "^1.83.0",
     "tailwindcss-animate": "^1.0.7",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wait-on": "^9.0.10"
   },
   "resolutions": {
     "minimatch": "^5.1.0"
+  },
+  "build": {
+    "appId": "com.spinlive.dj",
+    "productName": "SpinLive DJ",
+    "directories": {
+      "output": "dist-electron"
+    },
+    "files": [
+      "electron/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": ".next/standalone",
+        "to": "standalone"
+      }
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
