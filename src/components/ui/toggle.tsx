@@ -87,7 +87,7 @@ export function Toggle({
       <span
         aria-hidden
         className={cn(
-          "pointer-events-none absolute top-1/2 left-1 size-5 -translate-y-1/2 rounded-full bg-white shadow-[0_1px_2px_rgb(0_0_0/0.35)] transition-[left] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none",
+          "pointer-events-none absolute top-1/2 left-1 size-5 -translate-y-1/2 rounded-full bg-white shadow-[0_1px_2px_rgb(0_0_0/0.35)] transition-[left] duration-200 ease-smooth motion-reduce:transition-none",
           checked ? "left-[calc(100%-24px)]" : ""
         )}
       />

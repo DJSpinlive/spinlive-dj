@@ -19,6 +19,9 @@ module.exports = {
       fontFamily: {
         sans: ["var(--font-outfit)", "system-ui", "sans-serif"],
       },
+      transitionTimingFunction: {
+        smooth: "cubic-bezier(0.16, 1, 0.3, 1)",
+      },
       colors: {
         studio: {
           bg: "#070B12",

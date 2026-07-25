@@ -1,0 +1,17 @@
+node_modules
+.next
+out
+build
+dist-electron
+.git
+.github
+.husky
+.yarn/install-state.gz
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+.vscode
+.idea
+README.md

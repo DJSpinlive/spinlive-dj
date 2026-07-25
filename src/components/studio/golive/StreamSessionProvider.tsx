@@ -208,11 +208,13 @@ export function StreamSessionProvider({ children }: { children: ReactNode }) {
   }, []);
 
   /* ---------- live stream state (health, listeners) polled while live ---------- */
-  const { data: streamState, error: streamStateError } =
-    useGetStreamStateQuery(creds?.stream_id ?? "", {
+  const { data: streamState, error: streamStateError } = useGetStreamStateQuery(
+    creds?.stream_id ?? "",
+    {
       skip: !live || !creds,
       pollingInterval: 10_000,
-    });
+    }
+  );
   const viewers = Number(streamState?.listener_count ?? 0);
 
   useEffect(() => {

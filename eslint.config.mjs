@@ -1,4 +1,5 @@
 import { FlatCompat } from "@eslint/eslintrc";
+import nextPlugin from "@next/eslint-plugin-next";
 import typescriptPlugin from "@typescript-eslint/eslint-plugin";
 import typescriptParser from "@typescript-eslint/parser";
 import prettierPlugin from "eslint-plugin-prettier";
@@ -42,10 +43,13 @@ const eslintConfig = [
       "server.js",
       "public/firebase-messaging-sw.js",
       "scripts/**/*",
+      "electron/**/*",
+      "next-env.d.ts",
     ],
   },
   {
     plugins: {
+      "@next/next": nextPlugin,
       prettier: prettierPlugin,
       "@typescript-eslint": typescriptPlugin,
       "unused-imports": unusedImportsPlugin,
