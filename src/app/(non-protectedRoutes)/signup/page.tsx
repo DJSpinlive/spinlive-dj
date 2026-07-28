@@ -71,7 +71,7 @@ export default function SignupPage() {
           refreshToken: response.refresh_token,
         })
       );
-      router.push("/home");
+      router.push("/studio");
     } catch (error: unknown) {
       setSubmitError(
         getErrorMessage(error, {
